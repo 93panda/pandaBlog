@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+	<style>
+		canvas{
+			width:300;
+			height: 150;
+			border: solid 1px;
+			display: block;
+		}
+		
+	</style>	
+	</head>
+	<body>
+		
+		<canvas id="draw">
+			
+		</canvas>
+		
+		
+		<script>
+			var canvas = document.getElementById("draw");
+			var ctx = canvas.getContext("2d");
+			
+			ctx.fillStyle = "rgb(200,0,0)";//绘出来的图形用什么颜色填充
+			ctx.fillRect(10,10,55,50);
+			
+			ctx.fillStyle = "aqua";
+			ctx.fillRect(30,30,55,50);
+		</script>
+		
+		
+		<!--
+			矩形
+        -->
+		<canvas id="rect">
+	
+		</canvas>
+		<script>
+			var canvas = document.getElementById("rect");
+			var ctx = canvas.getContext("2d");
+			ctx.fillRect(25,25,100,100);
+			ctx.clearRect(45,45,60,60);
+			ctx.strokeRect(50,50,50,50);
+		</script>
+		
+		<!--
+        	矩形
+        -->
+        
+        
+        <!--
+        	路径绘画
+        	beginPath表示开始绘画路径
+        	moveTo指定起始点位置
+        	lineTo,从当前位置到指定的x,y位置画一条直线
+        	closePath(),这个方法会通过绘制一条从当前点到开始点的直线来闭合图形
+        	ctx.fill(),会自动闭合
+        	ctx.stroke不会闭合图形
+        -->
+        
+        <canvas id="p"></canvas>
+        
+        <script>
+        	var canvas = document.getElementById("p");
+        	var ctx = canvas.getContext("2d");
+        	
+        	ctx.beginPath();
+    		ctx.moveTo(25,25);
+    		ctx.lineTo(105,25);
+    		ctx.lineTo(25,105);
+    		ctx.closePath();
+   			ctx.stroke();
+    		
+        </script>
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：路径绘画
+        -->
+        
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：绘画圆形
+        	arc(x,y,radius,startAngle,endAngle,anticlockwise)
+        	x,y指定圆形位置
+        	radius指定半径
+        	startAngle 指定开始的弧度
+        	endAngle 指定结束的弧度
+        	anticlockwise 指定是按顺时针还是逆时针画图，false逆时针，true顺时针
+        -->
+        <canvas id="arc"></canvas>
+        <script>
+        	var canvas = document.getElementById("arc");
+        	var ctx = canvas.getContext("2d");
+        	ctx.beginPath();
+        	var x=150;
+        	var y=75;
+        	var radius=50;
+        	var startAngle = 0;
+        	var endAngle = Math.PI*2;
+        	var anticlockwise=true;
+        	
+        	ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+        	ctx.stroke();
+        	
+        	
+        	ctx.beginPath();
+        	x=130;
+        	y=55;
+        	radius=5;
+        	ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+        	ctx.fillStyle="red";
+        	ctx.fill();
+        	
+        	ctx.beginPath();
+        	x=170;
+        	ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+        	ctx.fillStyle="greenyellow";
+        	ctx.fill();
+        	
+        	
+        	ctx.beginPath();
+        	x=150;
+        	y=95;
+        	radius=15;
+        	startAngle = Math.PI/20;
+        	endAngle = Math.PI * 3 /4;
+        	anticlockwise=false;
+        	ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+        	ctx.stroke();
+        	
+        </script>
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：圆形绘画
+        -->
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：颜色填充
+        	fillStyle 指定填充图案的颜色 
+        	fillStroke 指定图形轮廓的颜色
+        	一旦设置了strokeStyle或者fillStyle的值，这个新值就会成为新绘制的图案的颜色
+        	rgba(255,0,0,0.5)和rgb方法类似,最后一个参数是设置透明度的
+        	globalAlpha 设置透明度
+        -->
+        <canvas id="color"></canvas>
+        
+        <script>var ctx = document.getElementById('color').getContext('2d');
+			for(var i = 0; i < 6; i++) {
+				for(var j = 0; j < 6; j++) {
+					ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ',' +
+						Math.floor(255 - 42.5 * j) + ',0)';
+					ctx.fillRect(j * 25, i * 25, 25, 25);
+				}
+		}</script>
+		
+		<!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：颜色填充
+        -->
+        
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：Line Styles 线条样式
+        -->
+        <canvas id="line"></canvas>
+        
+        <script>
+        	 var ctx = document.getElementById('line').getContext('2d');
+  			var lineCap = ['butt','round','square'];
+
+  			// 创建路径
+  			ctx.strokeStyle = '#09f';
+  			ctx.beginPath();
+ 			ctx.moveTo(10,10);
+ 			ctx.lineTo(140,10);
+ 			ctx.moveTo(10,140);
+ 			ctx.lineTo(140,140);
+  			ctx.stroke();
+
+  			// 画线条
+  			ctx.strokeStyle = 'black';
+  			for (var i=0;i<lineCap.length;i++){
+   				ctx.lineWidth = 15;
+    			ctx.lineCap = lineCap[i];
+    			ctx.beginPath();
+    			ctx.moveTo(25+i*50,10);
+    			ctx.lineTo(25+i*50,140);
+    			ctx.stroke();
+  			}
+        	
+        </script>
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：渐变
+        	createLinearGradient(10,10,150,10) 指定渐变的起点和终点
+        	lineGradient.addColorStop(0,"black");  第一个参数指定位置，0表示起点，1,表示终点， black表示颜色
+        -->
+        
+        <canvas id="gradient"></canvas>
+        
+        <script>
+        	var canvas = document.getElementById("gradient");
+        	var ctx = canvas.getContext("2d");
+        	var lineGradient = ctx.createLinearGradient(10,10,150,10);
+        	lineGradient.addColorStop(0,"black");
+        	lineGradient.addColorStop(0.5,"white");
+        	lineGradient.addColorStop(0.5,"yellow");
+        	lineGradient.addColorStop(1,"red");
+        	
+        	ctx.fillStyle = lineGradient;
+        	ctx.fillRect(10,10,100,100);
+        </script>
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：渐变
+        -->
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：绘制文本
+        	strokeText(text,x,y),fillText(text,x,y) x,y表示起始位置，text表示要绘制的文本，
+        	strokeText和fillText的区别是绘制的文本中间是实心还是空心
+        -->
+        
+        <canvas id="drawText"></canvas>
+        
+        <script>
+        	var canvas = document.getElementById("drawText");
+        	var ctx = canvas.getContext("2d");
+        	
+        	ctx.font = "30px serif";
+        	
+        	ctx.strokeText("Hello Panda",10,50);
+        	
+        	ctx.fillText("Hello Panda",10,80);
+        </script>
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：绘制文本
+        -->
+        
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-19
+        	描述：绘制图片
+        	获得img对象 new Image();
+        	drawImage(image,x,y,[width],[height]) 向画布里面画入图片，x,y画入的起始点，width,height指定图片的大小，这俩个参数可省略
+       		
+			切片 drawImage(image,sx,sy,sWidth,sHeight,dx,dy,dWidth,dHeight) sx,sy,sWidth,sHeight定义图像源的切片位置和大小，后4个参数定义切片在画布中展示的位置和大小 
+        -->
+        
+        <canvas id="drawImg"></canvas>
+        
+        <script>
+        	var ctx = document.getElementById("drawImg").getContext("2d");
+        	var img = new Image();
+        	img.onload = function(){
+        		ctx.drawImage(img,0,250,1500,500,10,10,100,100);
+        		ctx.beginPath();
+        		ctx.moveTo(10,10);
+        		ctx.lineTo(120,10);
+        		ctx.strokeStyle = "red";
+        		ctx.stroke();
+        	}
+        	img.src = "1.jpg";
+        </script>
+        
+        <!--
+        	作者：295741939@qq.com
+        	时间：2016-12-20
+        	描述：绘制图片
+        -->
+        
+        
+	</body>
+</html>
